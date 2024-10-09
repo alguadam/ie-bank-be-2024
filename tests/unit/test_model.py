@@ -16,6 +16,7 @@ def test_create_account():
     assert account.balance == 0.0
     assert account.status == 'Active'
 
+#==Test 1: default values
 def test_account_default_values():
     """
     GIVEN an Account model
@@ -26,6 +27,7 @@ def test_account_default_values():
     assert account.balance == 0.0  # Default balance
     assert account.status == 'Active'  # Default status
 
+#==Test 2: format of the account number
 def test_account_repr():
     """
     GIVEN an Account model
