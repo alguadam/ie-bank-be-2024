@@ -26,7 +26,6 @@ def skull():
 def create_account():
     name = request.json['name']
     currency = request.json['currency']
-    account = Account(name, currency)
     country = request.json['country']  # Get country from the request
     account = Account(name, currency, country)  # Pass country 
     db.session.add(account)
