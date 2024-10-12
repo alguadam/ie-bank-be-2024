@@ -23,9 +23,9 @@ db = SQLAlchemy(app)
 from iebank_api.models import Account
 
 with app.app_context():
-    query = text("ALTER TABLE account ADD COLUMN country VARCHAR(32)")
-    db.session.execute(query)
-    db.session.commit()
+    # query = text("ALTER TABLE account ADD COLUMN country VARCHAR(32)")
+    # db.session.execute(query)
+    # db.session.commit()
     db.create_all()
 CORS(app)
 
