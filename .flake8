@@ -1,2 +1,3 @@
    [flake8]
    exclude = .venv, venv, env, .env, __pycache__, .git, .tox, .nox, .eggs, *.egg
+   #to avoid the error we get from Flake
