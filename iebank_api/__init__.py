@@ -1,20 +1,24 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_cors import CORS
-from dotenv import load_dotenv
 import os
+from sqlalchemy import text
+
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+import os
+import dotenv
+
+dotenv.load_dotenv()
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///local.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
 
-load_dotenv()
-
-env = os.getenv('ENV', 'development')
+db = SQLAlchemy(app)
 
 # Select environment based on the ENV environment variable
-if os.getenv('ENV') == 'local': #  $env:ENV="local"
+if os.getenv('ENV') == 'local':
     print("Running in local mode")
     app.config.from_object('config.LocalConfig')
 elif os.getenv('ENV') == 'dev':
@@ -25,13 +29,14 @@ elif os.getenv('ENV') == 'ghci':
     app.config.from_object('config.GithubCIConfig')
 
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
-
 from iebank_api.models import Account
 
 with app.app_context():
+    # # Uncomment to add the country column to the account table
+    # query = text("ALTER TABLE account ADD COLUMN country VARCHAR(32)")
+    # db.session.execute(query)
+    # db.session.commit()
+
     db.create_all()
 CORS(app)
 
