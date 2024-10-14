@@ -21,12 +21,20 @@ def test_dummy_wrong_path():
         assert response.status_code == 404
 
 def test_create_account(testing_client):
-    """
-    GIVEN a Flask application
-    WHEN the '/accounts' page is posted to (POST)
-    THEN check the response is valid
-    """
-    response = testing_client.post('/accounts', json={'name': 'John Doe', 'currency': '€'})
-    assert response.status_code == 200
+    # Add the country field to the account creation request
+    response = testing_client.post('/accounts', json={
+        'name': 'John Doe',
+        'currency': '€',
+        'country': 'France'  # Include the country field
+    })
+    
+    assert response.status_code == 201  # Expecting a 201 Created status
+    data = response.get_json()
+    
+    # Ensure the response contains the correct account data
+    assert data['name'] == 'John Doe'
+    assert data['currency'] == '€'
+    assert data['country'] == 'France'  # Ensure the country is correctly returned
+
 
 

@@ -20,3 +20,8 @@ class DevelopmentConfig(Config):
     dbname=os.getenv('DBNAME')
     )
     DEBUG = True
+
+class TestConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'  # In-memory SQLite database for testing
+    TESTING = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
