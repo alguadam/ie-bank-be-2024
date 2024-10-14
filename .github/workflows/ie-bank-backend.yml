@@ -43,7 +43,7 @@ jobs:
       run: |
         python -m pytest --cov=iebank_api -v
     - name: Upload artifact for deployment jobs
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: python-app
         path: |
