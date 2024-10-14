@@ -7,6 +7,8 @@ import os
 
 app = Flask(__name__)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///local.db"
+
 load_dotenv()
 
 env = os.getenv('ENV', 'development')
@@ -21,9 +23,7 @@ elif os.getenv('ENV') == 'dev':
 elif os.getenv('ENV') == 'ghci':
     print("Running in github mode")
     app.config.from_object('config.GithubCIConfig')
-else:
-    print("Running in production mode")
-    app.config.from_object('config.ProductionConfig')
+
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
