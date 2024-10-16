@@ -32,11 +32,6 @@ elif os.getenv('ENV') == 'ghci':
 from iebank_api.models import Account
 
 with app.app_context():
-    # # Uncomment to add the country column to the account table
-    # query = text("ALTER TABLE account ADD COLUMN country VARCHAR(32)")
-    # db.session.execute(query)
-    # db.session.commit()
-
     db.create_all()
 CORS(app)
 
